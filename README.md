@@ -18,7 +18,7 @@ var (
 )
 ```
 
-因为access_token和jsapi_ticket的有效期都只有7200秒，需要在自己的服务全局缓存，所以用BoltDB做了持久化并自动更新。
+因为access_token和jsapi_ticket的有效期都只有7200秒，需要在自己的服务全局缓存，所以用BoltDB做了持久化并自动更新。本项目也附带自适应web模板、ajax交互示例，可以当成web项目参考。
 
 ## JSSDK使用步骤
 
@@ -30,7 +30,7 @@ var (
 
 ### 步骤二：引入JS文件
 
-在需要调用JS接口的页面引入如下JS文件，（支持https）：http://res.wx.qq.com/open/js/jweixin-1.2.0.js
+在需要调用JS接口的页面引入如下JS文件，（支持https）：[http://res.wx.qq.com/open/js/jweixin-1.2.0.js](http://res.wx.qq.com/open/js/jweixin-1.2.0.js)
 
 备注：支持使用 AMD/CMD 标准模块加载方法加载
 
