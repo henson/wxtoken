@@ -1,0 +1,41 @@
+html {
+    font-family: "Microsoft YaHei";
+    font-size: 100px;
+}
+
+body {
+    margin: auto;
+    padding: 0;
+    font-size: .28rem;
+}
+
+.mscBtn {
+    height: 50px;
+    background: url("/img/musicbtn.png") no-repeat;
+    display: block;
+}
+
+.pause {
+    background-position: 0 bottom;
+}
+
+.mc {
+    position: fixed;
+    z-index: 1;
+    width: 58px;
+    height: 50px;
+    top: 3.8rem;
+    right: 0;
+}
+
+.page {
+    width: 7.2rem;
+}
+
+.foot {
+    font-size: 0.1rem;
+    margin: 0.3rem auto;
+    display: block;
+    text-align: center;
+    line-height: 0.1rem;
+}
