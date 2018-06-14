@@ -13,10 +13,7 @@ var (
     //微信公众号
     wxAppID  = ""
     wxSecret = ""
-    //随机字符串
-    wxNoncestr = ""
-    //Port 本地端口
-    Port = ":8383"
+    port = ":8383"
 )
 ```
 
