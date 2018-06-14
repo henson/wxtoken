@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"html/template"
 	"log"
+	"math/rand"
 	"net/http"
 	"net/url"
 	"strconv"
@@ -44,13 +45,15 @@ type IndexTemplate struct {
 
 var (
 	//微信公众号
-	wxAppID  = ""
-	wxSecret = ""
-	//随机字符串
-	wxNoncestr = ""
-	//Port 本地端口
-	Port = ":8383"
+	wxAppID     = ""
+	wxSecret    = ""
+	port        = ":8383"
+	letterRunes = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
 )
+
+func init() {
+	rand.Seed(time.Now().UnixNano())
+}
 
 func main() {
 	go func() {
@@ -65,14 +68,15 @@ func main() {
 	http.Handle("/js/", http.FileServer(http.Dir("html")))
 	http.Handle("/", http.FileServer(http.Dir("html/www"))) //存放微信JS接口安全域名验证文件
 	http.HandleFunc("/sign", signHandler)
-	http.ListenAndServe(Port, nil)
-	log.Println("Server start at", Port)
+	http.ListenAndServe(port, nil)
+	log.Println("Server start at", port)
 }
 
 //signHandler 异步处理微信签名
 func signHandler(w http.ResponseWriter, r *http.Request) {
 	r.ParseForm()
 	if r.Method == "POST" {
+		wxNoncestr := RandStringRunes(32)
 		wxURL, _ := url.QueryUnescape(r.FormValue("url"))
 		timestamp, signature := GetCanshu(wxNoncestr, wxURL)
 		var u = Sign{
@@ -143,4 +147,13 @@ func GetWeixin(appid, secret string) {
 	if e := db.Set("sessions", "ticket", &tc); e != nil {
 		log.Println(e.Error())
 	}
+}
+
+//RandStringRunes 生成随机字符串
+func RandStringRunes(n int) string {
+	b := make([]rune, n)
+	for i := range b {
+		b[i] = letterRunes[rand.Intn(len(letterRunes))]
+	}
+	return string(b)
 }
