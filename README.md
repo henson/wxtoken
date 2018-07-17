@@ -1,6 +1,6 @@
 # WXToken
 
-[![Travis Status for henson/WXToken](https://travis-ci.org/henson/WXToken.svg?branch=master)](https://travis-ci.org/henson/WXToken) [![Go Report Card](https://goreportcard.com/badge/github.com/henson/WXToken)](https://goreportcard.com/report/github.com/henson/WXToken)
+[![Travis Status for henson/wxtoken](https://travis-ci.org/henson/wxtoken.svg?branch=master)](https://travis-ci.org/henson/wxtoken) [![Go Report Card](https://goreportcard.com/badge/github.com/henson/wxtoken)](https://goreportcard.com/report/github.com/henson/wxtoken)
 
 因为手上有一个项目需要用到微信的朋友圈分享，涉及到微信JSSDK，所以写了个生成示例，自动获取微信access_token、jsapi_ticket和signature签名算法，开箱即用。
 

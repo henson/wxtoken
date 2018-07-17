@@ -11,123 +11,140 @@
     <script type="text/javascript" src="//res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
     <script type="text/javascript">
         $(function () {
-            //自动播放音乐
-            var music = document.getElementById("bgMusic");
-            $("#audioBtn").click(function () {
-                if (music.paused) {
-                    music.play();
-                    $("#audioBtn").removeClass("pause").addClass("play");
-                } else {
-                    music.pause();
-                    $("#audioBtn").removeClass("play").addClass("pause");
-                }
-            });
-
-            jQuery.post("/sign", {
-                "url": encodeURIComponent(window.location.href.split('#')[0])
-            }, function (result) {
-                wx.config({
-                    debug: true,
-                    appId: result.app_id,
-                    timestamp: result.timestamp,
-                    nonceStr: result.nonce_str,
-                    signature: result.signature,
-                    jsApiList: [
-                        'checkJsApi',
-                        'onMenuShareTimeline',
-                        'onMenuShareAppMessage',
-                        'onMenuShareQQ',
-                        'onMenuShareWeibo',
-                        'onMenuShareQZone'
-                    ]
-                });
-                var shareTitle = "标题文字";
-                var shareDesc = "简介文字，最好不超过60个字";
-                var shareLink = window.location.href.split('#')[0];
-                var shareImgUrl = "//url/path/to/jpg"; //分享图标
-
-                wx.ready(function () {
-                    document.getElementById('bgMusic').play();
-                    //分享给朋友
-                    wx.onMenuShareAppMessage({
-                        title: shareTitle,
-                        desc: shareDesc,
-                        link: shareLink,
-                        imgUrl: shareImgUrl,
-                        type: 'link', // 分享类型，music、video或link，不填默认为link
-                        dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
-                        success: function (res) {
-                            alert("分享成功");
-                            //成功后的响应操作
-                        },
-                        fail: function (res) {
-                            alert("分享失败");
-                            //alert(JSON.stringify(res));
-                        }
-                    });
-                    //分享到朋友圈
-                    wx.onMenuShareTimeline({
-                        title: shareTitle,
-                        link: shareLink,
-                        imgUrl: shareImgUrl,
-                        success: function (res) {
-                            alert("分享成功");
-                            //成功后的响应操作
-                        },
-                        fail: function (res) {
-                            alert("分享失败");
-                            //alert(JSON.stringify(res));
-                        }
-                    });
-                    //分享到QQ
-                    wx.onMenuShareQQ({
-                        title: shareTitle,
-                        desc: shareDesc,
-                        link: shareLink,
-                        imgUrl: shareImgUrl,
-                        success: function (res) {
-                            alert("分享成功");
-                            //成功后的响应操作
-                        },
-                        fail: function (res) {
-                            alert("分享失败");
-                            //alert(JSON.stringify(res));
-                        }
-                    });
-                    //分享到腾讯微博
-                    wx.onMenuShareWeibo({
-                        title: shareTitle,
-                        desc: shareDesc,
-                        link: shareLink,
-                        imgUrl: shareImgUrl,
-                        success: function (res) {
-                            alert("分享成功");
-                            //成功后的响应操作
-                        },
-                        fail: function (res) {
-                            alert("分享失败");
-                            //alert(JSON.stringify(res));
-                        }
-                    });
-                    //分享到QQ空间
-                    wx.onMenuShareQZone({
-                        title: shareTitle,
-                        desc: shareDesc,
-                        link: shareLink,
-                        imgUrl: shareImgUrl,
-                        success: function (res) {
-                            alert("分享成功");
-                            //成功后的响应操作
-                        },
-                        fail: function (res) {
-                            alert("分享失败");
-                            //alert(JSON.stringify(res));
+                    //自动播放音乐
+                    var music = document.getElementById("bgMusic");
+                    $("#audioBtn").click(function () {
+                        if (music.paused) {
+                            music.play();
+                            $("#audioBtn").removeClass("pause").addClass("play");
+                        } else {
+                            music.pause();
+                            $("#audioBtn").removeClass("play").addClass("pause");
                         }
                     });
 
-                });
-            });
-        });
+                    jQuery.post("/sign", {
+                            "url": encodeURIComponent(window.location.href.split('#')[0])
+                        }, function (result) {
+                            wx.config({
+                                debug: true,
+                                appId: result.app_id,
+                                timestamp: result.timestamp,
+                                nonceStr: result.nonce_str,
+                                signature: result.signature,
+                                jsApiList: [
+                                    'checkJsApi',
+                                    'onMenuShareTimeline',
+                                    'onMenuShareAppMessage',
+                                    'onMenuShareQQ',
+                                    'onMenuShareWeibo',
+                                    'onMenuShareQZone',
+                                    'configWXDeviceWiFi'
+                                ]
+                            });
+                            var shareTitle = "标题文字";
+                            var shareDesc = "简介文字，最好不超过60个字";
+                            var shareLink = window.location.href.split('#')[0];
+                            var shareImgUrl = "//url/path/to/jpg"; //分享图标
+
+                            wx.ready(function () {
+                                document.getElementById('bgMusic').play();
+                                //分享给朋友
+                                wx.onMenuShareAppMessage({
+                                    title: shareTitle,
+                                    desc: shareDesc,
+                                    link: shareLink,
+                                    imgUrl: shareImgUrl,
+                                    type: 'link', // 分享类型，music、video或link，不填默认为link
+                                    dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+                                    success: function (res) {
+                                        alert("分享成功");
+                                        //成功后的响应操作
+                                    },
+                                    fail: function (res) {
+                                        alert("分享失败");
+                                        //alert(JSON.stringify(res));
+                                    }
+                                });
+                                //分享到朋友圈
+                                wx.onMenuShareTimeline({
+                                    title: shareTitle,
+                                    link: shareLink,
+                                    imgUrl: shareImgUrl,
+                                    success: function (res) {
+                                        alert("分享成功");
+                                        //成功后的响应操作
+                                    },
+                                    fail: function (res) {
+                                        alert("分享失败");
+                                        //alert(JSON.stringify(res));
+                                    }
+                                });
+                                //分享到QQ
+                                wx.onMenuShareQQ({
+                                    title: shareTitle,
+                                    desc: shareDesc,
+                                    link: shareLink,
+                                    imgUrl: shareImgUrl,
+                                    success: function (res) {
+                                        alert("分享成功");
+                                        //成功后的响应操作
+                                    },
+                                    fail: function (res) {
+                                        alert("分享失败");
+                                        //alert(JSON.stringify(res));
+                                    }
+                                });
+                                //分享到腾讯微博
+                                wx.onMenuShareWeibo({
+                                    title: shareTitle,
+                                    desc: shareDesc,
+                                    link: shareLink,
+                                    imgUrl: shareImgUrl,
+                                    success: function (res) {
+                                        alert("分享成功");
+                                        //成功后的响应操作
+                                    },
+                                    fail: function (res) {
+                                        alert("分享失败");
+                                        //alert(JSON.stringify(res));
+                                    }
+                                });
+                                //分享到QQ空间
+                                wx.onMenuShareQZone({
+                                    title: shareTitle,
+                                    desc: shareDesc,
+                                    link: shareLink,
+                                    imgUrl: shareImgUrl,
+                                    success: function (res) {
+                                        alert("分享成功");
+                                        //成功后的响应操作
+                                    },
+                                    fail: function (res) {
+                                        alert("分享失败");
+                                        //alert(JSON.stringify(res));
+                                    }
+                                });
+                            });
+                            //配置Airkiss
+                            var config = function () {
+                                wx.checkJsApi({
+                                    jsApiList: ['configWXDeviceWiFi'],
+                                    success: function (res) {
+                                        // 以键值对的形式返回，可用的api值true，不可用为false
+                                        // 如：{"checkResult":{"chooseImage":true},"errMsg":"checkJsApi:ok"}
+                                        wx.invoke('configWXDeviceWiFi', {}, function (res) {
+                                            if (res.err_msg == 'configWXDeviceWiFi:ok') {
+                                                alert('配置成功!');
+                                                wx.closeWindow();
+                                            } else {
+                                                alert('配置失败！请重试');
+                                            }
+                                        });
+                                    }
+                                });
+                            });
+                    });
     </script>
 </head>
 
@@ -137,6 +154,7 @@
 其它页面
 
 -->
+    <button style="height:20px;width:100px;" onclick="config()"> airkiss </button>
     <div class="mc">
         <a id="audioBtn" class="mscBtn" title="音乐开关" style="cursor: pointer;"></a>
     </div>
